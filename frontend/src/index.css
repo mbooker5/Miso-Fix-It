@@ -1,0 +1,193 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --font-head: "Outfit", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --font-body: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system,
+        sans-serif;
+
+    /* Brand */
+    --brand-primary: 223 100% 33%; /* #002FA7 klein blue */
+    --brand-primary-hover: 226 100% 24%;
+    --brand-accent: 214 100% 56%; /* electric */
+    --brand-ink: 222 47% 11%; /* slate-900 */
+    --brand-ink-soft: 215 25% 27%;
+
+    /* Status */
+    --status-excellent: 152 69% 39%;
+    --status-good: 45 93% 47%;
+    --status-fair: 32 95% 44%;
+    --status-needs-work: 0 72% 51%;
+}
+
+html {
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: hsl(var(--brand-ink));
+    background: #fff;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    background: #fff;
+    color: hsl(var(--brand-ink));
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.font-display {
+    font-family: var(--font-head);
+    letter-spacing: -0.02em;
+}
+
+@layer base {
+    :root {
+        --background: 0 0% 100%;
+        --foreground: 222 47% 11%;
+        --card: 0 0% 100%;
+        --card-foreground: 222 47% 11%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 222 47% 11%;
+        --primary: 223 100% 33%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 210 40% 96%;
+        --secondary-foreground: 222 47% 11%;
+        --muted: 210 40% 96%;
+        --muted-foreground: 215 16% 47%;
+        --accent: 214 100% 96%;
+        --accent-foreground: 223 100% 33%;
+        --destructive: 0 72% 51%;
+        --destructive-foreground: 0 0% 100%;
+        --border: 214 32% 91%;
+        --input: 214 32% 91%;
+        --ring: 223 100% 33%;
+        --radius: 0.75rem;
+        --chart-1: 223 100% 33%;
+        --chart-2: 214 100% 56%;
+        --chart-3: 152 69% 39%;
+        --chart-4: 45 93% 47%;
+        --chart-5: 0 72% 51%;
+    }
+
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+}
+
+/* Grid background helper for hero */
+.bg-grid {
+    background-image:
+        linear-gradient(
+            to right,
+            rgba(0, 47, 167, 0.06) 1px,
+            transparent 1px
+        ),
+        linear-gradient(to bottom, rgba(0, 47, 167, 0.06) 1px, transparent 1px);
+    background-size: 56px 56px;
+}
+
+.bg-grid-dense {
+    background-image:
+        linear-gradient(
+            to right,
+            rgba(0, 47, 167, 0.08) 1px,
+            transparent 1px
+        ),
+        linear-gradient(to bottom, rgba(0, 47, 167, 0.08) 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+/* Subtle noise for depth */
+.bg-noise::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.04 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.6;
+    mix-blend-mode: multiply;
+}
+
+/* Tradeline card glow */
+.popular-glow {
+    position: relative;
+}
+.popular-glow::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(
+        135deg,
+        hsl(var(--brand-primary)),
+        hsl(var(--brand-accent)) 50%,
+        hsl(var(--brand-primary))
+    );
+    background-size: 200% 200%;
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: popular-flow 4s linear infinite;
+}
+
+@keyframes popular-flow {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 200% 200%;
+    }
+}
+
+/* Number input appearance cleanup */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* Scrollbar */
+::selection {
+    background: hsl(var(--brand-primary));
+    color: #fff;
+}
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+    .text-pretty {
+        text-wrap: pretty;
+    }
+}
+
+/* Debug wrapper from template - keep */
+@layer base {
+    [data-debug-wrapper="true"] {
+        display: contents !important;
+    }
+    [data-debug-wrapper="true"] > * {
+        margin: inherit;
+        padding: inherit;
+        gap: inherit;
+        border-width: inherit;
+        border-style: inherit;
+        border-color: inherit;
+    }
+}

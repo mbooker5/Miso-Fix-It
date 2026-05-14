@@ -1,0 +1,130 @@
+{
+  "project_overview": {
+    "name": "Miso Fix It",
+    "description": "Credit tradeline service marketing, pricing, and interactive qualifier platform.",
+    "app_type": "hybrid_fullstack"
+  },
+  "theme": {
+    "archetype": "4 (Swiss & High-Contrast)",
+    "mode": "light",
+    "rationale": "Financial services demand authority, clarity, and truth. Using a high-contrast Swiss archetype with crisp whites, deep navy, and electric blue accents provides a premium, trustworthy, energetic feel without resorting to 'fintech-bro dark mode' or generic purples.",
+    "colors": {
+      "primary": "#002FA7",
+      "primary_hover": "#00227A",
+      "primary_foreground": "#FFFFFF",
+      "background": "#FFFFFF",
+      "surface": "#F9FAFB",
+      "surface_border": "#E5E7EB",
+      "text_main": "#0F172A",
+      "text_muted": "#64748B",
+      "status_excellent": "#10B981",
+      "status_good": "#EAB308",
+      "status_fair": "#F59E0B",
+      "status_needs_work": "#EF4444"
+    },
+    "typography": {
+      "heading_font": "Outfit",
+      "body_font": "Plus Jakarta Sans",
+      "banned_fonts": ["Inter", "Roboto", "Open Sans", "Lato", "Syne"],
+      "hierarchy": {
+        "h1": "text-4xl sm:text-5xl lg:text-6xl tracking-tighter font-bold",
+        "h2": "text-2xl sm:text-3xl lg:text-4xl tracking-tight font-semibold",
+        "body": "text-base leading-relaxed text-slate-700"
+      }
+    }
+  },
+  "layout_strategy": {
+    "spacing": "Generous scale. Use p-8, p-12 for containers. Gap-8 to gap-12 for bento grids.",
+    "surfaces": "Flat, sharp, solid backgrounds. Use 1px subtle borders (border-border) with very soft shadows (shadow-sm) on interactive cards.",
+    "radii": "Subtle roundness, max 8px or 12px. No extreme pill-shapes except for specific badges.",
+    "alignment": "Optical alignment over geometrical. Left-align dense data, center-align hero text.",
+    "dashboard_grid": "The 'Control Room' Grid: Density, Data Correlation, Scanability. grid-cols-1 md:grid-cols-3. Gap-4 or gap-6."
+  },
+  "pages": {
+    "home": {
+      "sections": [
+        "Hero (Headline, subtitle, primary CTA to Pricing, secondary CTA to Qualifier)",
+        "Value Props (Bento grid of benefits: speed, guaranteed posting, trust)",
+        "How It Works (3-step horizontal flow)",
+        "Trust Indicators (Testimonials or stats)",
+        "CTA Section (Footer driver)"
+      ]
+    },
+    "pricing": {
+      "structure": "Split into two main sections or tabs: Individual Tradelines vs Bundles.",
+      "individual_tradelines": [
+        { "name": "Amex $27.5k", "price": 475 },
+        { "name": "Amex $15.5k", "price": 425 },
+        { "name": "Capital One $9.3k", "price": 325 },
+        { "name": "Wells Fargo $5.5k", "price": 275 }
+      ],
+      "bundles": [
+        { "name": "Starter Builder", "price": 525 },
+        { "name": "Credit Builder Plus", "price": 625 },
+        { "name": "High Limit Flex", "price": 675 },
+        { "name": "Amex Power Pack", "price": 725, "badge": "MOST POPULAR" },
+        { "name": "Limit Booster", "price": 795 },
+        { "name": "Ultimate Credit Boost", "price": 1075 }
+      ],
+      "design_note": "Highlight the 'Amex Power Pack' with a tracing beam or vibrant colored border and a slightly larger scale."
+    },
+    "qualifier_form": {
+      "layout": "Two-column split screen on desktop. Left column: Intake Form. Right column: Sticky Live Credit Factors Dashboard.",
+      "form_fields": [
+        { "name": "full_name", "type": "text" },
+        { "name": "email", "type": "email" },
+        { "name": "phone", "type": "tel" },
+        { "name": "payment_history_pct", "type": "number", "label": "Payment History (%)" },
+        { "name": "credit_age_years", "type": "number", "label": "Credit Age (Years)" },
+        { "name": "credit_age_months", "type": "number", "label": "Credit Age (Months)" },
+        { "name": "credit_score", "type": "number", "label": "Credit Score" },
+        { "name": "derogatory_marks", "type": "number", "label": "Derogatory Marks Count" },
+        { "name": "credit_utilization_pct", "type": "number", "label": "Credit Utilization (%)" },
+        { "name": "total_credit_limit", "type": "number", "label": "Total Credit Limit ($)" },
+        { "name": "number_of_accounts", "type": "number", "label": "Number of Accounts" },
+        { "name": "payment_schedule", "type": "select", "options": ["Weekly", "Biweekly", "Monthly", "Straight Deposit"] },
+        { "name": "selected_package", "type": "select", "label": "Selected Package" }
+      ],
+      "live_dashboard": {
+        "score_gauge": "A semi-circular gauge representing the user's input Credit Score. Updates dynamically. Colored ranges for Poor, Fair, Good, Excellent.",
+        "factor_cards": [
+          "Credit Utilization (High/Medium/Low impact)",
+          "Payment History (High/Medium/Low impact)",
+          "Derogatory (High/Medium/Low impact)",
+          "Credit Age (Medium impact)",
+          "Total Accounts (Low impact)",
+          "Hard Inquiries (Low impact)"
+        ],
+        "interaction_rule": "As the user types into the form fields, the state MUST instantly reflect in the right-hand dashboard. Status dots should compute based on standard industry thresholds (e.g. Utilization < 10% is Excellent, > 30% Needs Work)."
+      }
+    }
+  },
+  "component_instructions": {
+    "forms": "Use React Hook Form + Zod + Shadcn Form primitives. Never use native raw inputs.",
+    "gauge_chart": "Use Recharts `RadialBarChart` configured as a half-circle (startAngle: 180, endAngle: 0) to simulate a TransUnion/Equifax gauge. Display the score prominently in the center.",
+    "cards": "Use Shadcn Cards without heavy drop shadows. Rely on 1px borders. For the 'MOST POPULAR' pricing card, use a glowing or active border.",
+    "animations": "Framer Motion for page transitions and micro-interactions. The gauge needle or fill should animate smoothly when the user changes the score input.",
+    "icons": "Use lucide-react or @phosphor-icons/react. Every factor card needs an appropriate distinct icon."
+  },
+  "image_urls": {
+    "hero_background": {
+      "url": "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHw0fHxhYnN0cmFjdCUyMGJsdWUlMjBiYWNrZ3JvdW5kfGVufDB8fHx8MTc3NzMzNjg2Nnww&ixlib=rb-4.1.0&q=85",
+      "description": "Abstract modern blue wavy background for the hero section. Use with a white/light-gray overlay (bg-white/80 backdrop-blur-sm) to keep text readable."
+    },
+    "trust_section": {
+      "url": "https://images.unsplash.com/photo-1758611974022-ca3182694951?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzB8MHwxfHNlYXJjaHw0fHxtb2Rlcm4lMjBmaW5hbmNlJTIwbGlmZXN0eWxlfGVufDB8fHx8MTc3NzMzNjg1NHww&ixlib=rb-4.1.0&q=85",
+      "description": "Woman holding credit card/phone for the 'How it works' or Trust section."
+    },
+    "pricing_highlight": {
+      "url": "https://images.pexels.com/photos/33937109/pexels-photo-33937109.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "Dynamic fluid blue background. Can be used for the Amex Power Pack card background or banner."
+    },
+    "checkout_success": {
+      "url": "https://images.unsplash.com/photo-1609429019995-8c40f49535a5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1Mjh8MHwxfHNlYXJjaHw0fHxjcmVkaXQlMjBjYXJkfGVufDB8fHx8MTc3NzMzNjg2Nnww&ixlib=rb-4.1.0&q=85",
+      "description": "Credit card on laptop representing secure transaction. For checkout or success page."
+    }
+  },
+  "testing": {
+    "data_testid_rules": "All interactive elements, form inputs, submit buttons, and the dashboard gauge/cards MUST include a `data-testid` attribute (e.g., `data-testid='credit-score-input'`, `data-testid='live-score-gauge'`)."
+  }
+}
